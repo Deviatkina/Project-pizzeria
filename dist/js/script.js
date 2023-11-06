@@ -51,19 +51,30 @@ const select = {
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
-  class Product{
-    constructor(){
+  class Product{ /*Dodano pierwszą klasę Product*/
+    constructor(){ 
       const thisProduct = this;
       console.log ('new Product:', thisProduct);
     }
   }
 
   const app = {
-    initMenu: function(){
-      const testProduct = new Product ();
-      console.log('testProduct:', testProduct);
+    initMenu: function(){ /*Dodano instancje do każdego elementu z klasy Product*/
+      const thisApp = this;
+      console.log('thisApp.data:', thisApp.data);
+      
+      for(let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
     },
 
+    /*Część kodu, która będzie potem odpowiadała za wczytywanie informacji o produktach do aplikacji z serwera*/
+    initData: function (){
+      const thisApp = this;
+
+      thisApp.data = dataSource;
+    },
+    
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -72,9 +83,12 @@ const select = {
       console.log('settings:', settings);
       console.log('templates:', templates);
 
+      thisApp.initData();
+
       thisApp.initMenu();
     },
-  };
 
+    
+  };
   app.init();
 }
