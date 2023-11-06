@@ -55,9 +55,25 @@ const select = {
   class Product{ 
     constructor(id, data){ 
       const thisProduct = this;
-      console.log ('new Product:', thisProduct);
+
+      thisProduct.renderInMenu();
+
       thisProduct.id = id;
       thisProduct.data = data;
+
+      console.log ('new Product:', thisProduct);
+    }
+    renderInMenu(){
+      const thisProduct = this;
+
+      /* enerate HTML based on template */
+
+      /* create element using utils.createElementFromHTML */
+
+      /* find menu container */
+      
+      /* add element to menu */
+
     }
   }
 
