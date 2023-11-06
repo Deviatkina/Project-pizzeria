@@ -51,10 +51,13 @@ const select = {
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
-  class Product{ /*Dodano pierwszą klasę Product*/
-    constructor(){ 
+  /*Dodajemy klasę Product*/
+  class Product{ 
+    constructor(id, data){ 
       const thisProduct = this;
       console.log ('new Product:', thisProduct);
+      thisProduct.id = id;
+      thisProduct.data = data;
     }
   }
 
