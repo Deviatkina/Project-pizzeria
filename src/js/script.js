@@ -63,6 +63,7 @@
       thisProduct.getElements();
 
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
 
       console.log('new Product:', thisProduct);
     }
@@ -157,6 +158,11 @@
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           console.log(optionId, option);
+          
+          if (formData[paramId] && formData[paramId].includes(optionId)) {
+            // Option is selected, add its price to the total
+            price += option.price;
+          }
         }
       }
 
