@@ -147,10 +147,6 @@
       const formData = utils.serializeFormToObject(thisProduct.form);
       //console.log('formData', formData);
 
-      /* //[NEW] image to the object
-      const imageData = utils.serializeFormToObject(thisProduct.imageWrapper);
-      console.log('imageData', imageData);*/
-
       // set price to default price
       let price = thisProduct.data.price;
 
@@ -164,17 +160,18 @@
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          //console.log(optionId, option);
-
-          //[NEW]finding the image with thr class .paramId-optionId in the div with the images
-          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-          //console.log(optionImage);
+          //console.log(optionId, option);         
 
           //chekong if this option selected in our form
           if (formData[paramId] && formData[paramId].includes(optionId)) {
             // Option is selected, add its price to the total
             price += option.price;
           }
+          
+           //[NEW]finding the image with thr class .paramId-optionId in the div with the images
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          //console.log(optionImage);
+
           if (optionImage) {
              //chekong if this option selected in our form
             if(formData[paramId] && formData[paramId].includes(optionId)) {
