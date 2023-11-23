@@ -82,9 +82,9 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
-    getElements(){
+    getElements() {
       const thisProduct = this;
-    
+
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
@@ -105,8 +105,8 @@
 
       /* START: add event listener to clickable trigger on event click */
       clickableTrigger.addEventListener('click', function (event) {
-      /*[lub powyższy kod może być zapisany tak 
-      thisProduct.accordionTrigger.addEventListener('click', function(event) { ]*/  
+        /*[lub powyższy kod może być zapisany tak 
+        thisProduct.accordionTrigger.addEventListener('click', function(event) { ]*/
         /* prevent default action for event */
         event.preventDefault();
         /* find active product (product that has active class) */
@@ -120,74 +120,72 @@
         thisProduct.element.classList.toggle('active');
       });
     }
-    initOrderForm(){
+    initOrderForm() {
       const thisProduct = this;
-      console.log (thisProduct);
+      console.log(thisProduct);
 
-      thisProduct.form.addEventListener('submit', function(event){
+      thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
-      
-      for(let input of thisProduct.formInputs){
-        input.addEventListener('change', function(){
+
+      for (let input of thisProduct.formInputs) {
+        input.addEventListener('change', function () {
           thisProduct.processOrder();
         });
       }
-      
-      thisProduct.cartButton.addEventListener('click', function(event){
+
+      thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
     }
-    processOrder(){
+    processOrder() {
       const thisProduct = this;
 
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      //console.log('formData', formData);
 
-      //[NEW]
+      /* //[NEW] image to the object
       const imageData = utils.serializeFormToObject(thisProduct.imageWrapper);
-      console.log('imageData', imageData);
+      console.log('imageData', imageData);*/
 
       // set price to default price
       let price = thisProduct.data.price;
 
       // for every category (param)...
-      for(let paramId in thisProduct.data.params) {
+      for (let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
+        //console.log(paramId, param);
 
         // for every option in this category
-        for(let optionId in param.options) {
+        for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
+          //console.log(optionId, option);
+
+          //[NEW]finding the image with thr class .paramId-optionId in the div with the images
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          //console.log(optionImage);
 
           //chekong if this option selected in our form
           if (formData[paramId] && formData[paramId].includes(optionId)) {
             // Option is selected, add its price to the total
             price += option.price;
-
-          //[NEW]finding the image with thr class .paramId-optionId in the div with the images
-          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId); 
-
-            //[NEW]Use optionImage as needed
-            if (optionImage) {
-              if(imageData[paramId] && imageData[paramId].includes(optionId)) {
-                optionImage.classList.toggle('active');
-              }
-              else {
-                optionImage.classList.toggle('active');
-              }
+          }
+          if (optionImage) {
+             //chekong if this option selected in our form
+            if(formData[paramId] && formData[paramId].includes(optionId)) {
+              optionImage.classList.add('active');
+            }
+            else {
+              optionImage.classList.remove('active');
             }
           }
-          
         }
       }
-
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
