@@ -90,6 +90,9 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+
+      /*referencje do diva z obrazkami*/
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -144,6 +147,10 @@
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
 
+      //[NEW]
+      const imageData = utils.serializeFormToObject(thisProduct.imageWrapper);
+      console.log('imageData', imageData);
+
       // set price to default price
       let price = thisProduct.data.price;
 
@@ -158,11 +165,26 @@
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           console.log(optionId, option);
-          
+
+          //chekong if this option selected in our form
           if (formData[paramId] && formData[paramId].includes(optionId)) {
             // Option is selected, add its price to the total
             price += option.price;
+
+          //[NEW]finding the image with thr class .paramId-optionId in the div with the images
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId); 
+
+            //[NEW]Use optionImage as needed
+            if (optionImage) {
+              if(imageData[paramId] && imageData[paramId].includes(optionId)) {
+                optionImage.classList.toggle('active');
+              }
+              else {
+                optionImage.classList.toggle('active');
+              }
+            }
           }
+          
         }
       }
 
