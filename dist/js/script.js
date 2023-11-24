@@ -68,6 +68,8 @@
       //[NEW] wywolujemy metodę initAmountWidget
       thisProduct.initAmountWidget();
 
+      thisProduct.processOrder();
+
       console.log('new Product:', thisProduct);
     }
     renderInMenu() {
