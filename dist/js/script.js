@@ -65,6 +65,9 @@
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
 
+      //[NEW] wywolujemy metodę initAmountWidget
+      thisProduct.initAmountWidget();
+
       console.log('new Product:', thisProduct);
     }
     renderInMenu() {
@@ -93,12 +96,16 @@
 
       /*referencje do diva z obrazkami*/
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+   
+      /* [NEW] referencje dla nowej klasy AmountWidget*/
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+
     }
 
     initAccordion() {
       /*Dodanie metody initAccordion */
       const thisProduct = this;
-      console.log(thisProduct);
+      //console.log(thisProduct);
 
       /* find the clickable trigger (the element that should react to clicking) */
       const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
@@ -122,7 +129,7 @@
     }
     initOrderForm() {
       const thisProduct = this;
-      console.log(thisProduct);
+      //console.log(thisProduct);
 
       thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -140,6 +147,16 @@
         thisProduct.processOrder();
       });
     }
+
+    //[NEW to AmountWidget class]
+    initAmountWidget() {
+      const thisProduct = this;
+
+      thisProduct.amountWidget= new AmountWidget(thisProduct.amountWidgetElem);
+      
+    }
+    
+
     processOrder() {
       const thisProduct = this;
 
@@ -160,19 +177,18 @@
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          //console.log(optionId, option);
-
-         
+          //console.log(optionId, option);         
 
           //chekong if this option selected in our form
           if (formData[paramId] && formData[paramId].includes(optionId)) {
             // Option is selected, add its price to the total
             price += option.price;
           }
+
            //[NEW]finding the image with thr class .paramId-optionId in the div with the images
           const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
           //console.log(optionImage);
-          
+
           if (optionImage) {
              //chekong if this option selected in our form
             if(formData[paramId] && formData[paramId].includes(optionId)) {
@@ -188,6 +204,17 @@
       thisProduct.priceElem.innerHTML = price;
     }
   }
+
+//Dodanie kolejnej klasy (Moduł 9)
+//Klasa AmountWidget używana dla zmiany wartości/ilości produktów za pomocą inputa lub przycisków "+" i "-"
+class AmountWidget{
+  constructor(element){
+    const thisWidget = this;
+
+    console.log('AmountWidget:', thisWidget);
+    console.log('constructor argument:', element);
+  }
+}
 
   const app = {
     initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/
