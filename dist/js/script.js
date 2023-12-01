@@ -213,8 +213,39 @@ class AmountWidget{
   constructor(element){
     const thisWidget = this;
 
+    thisWidget.getElements(element);
+
     console.log('AmountWidget:', thisWidget);
     console.log('constructor argument:', element);
+  }
+  getElements(element){
+    const thisWidget = this;
+  
+    thisWidget.element = element;
+    thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+    thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+    thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+  
+    thisWidget.setValue(thisWidget.input.value);
+  }
+  setValue(value){
+    const thisWidget = this;
+
+    const newValue = parseInt(value);
+
+    /*TO DO : Add validation*/
+    if (thisWidget.value !== newValue && !isNaN(newValue)){
+      thisWidget.value = newValue;
+    } 
+    
+    thisWidget.value = newValue;
+    thisWidget.input.value = thisWidget.value;
+  }
+  initActions(){
+    thisWidget.input.addEventListener('Change', function ()){
+      thisWidget.setValue(thisWidget.input.value);
+      console.log('Liczba została zmieniona', thisWidget.input.value);
+    }
   }
 }
 
