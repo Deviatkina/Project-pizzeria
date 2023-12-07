@@ -244,6 +244,8 @@
       thisWidget.input.value = thisWidget.value;
     }
     initActions() {
+      const thisWidget = this;
+      
       thisWidget.input.addEventListener('change', function () {
         thisWidget.setValue(thisWidget.input.value);
         console.log('Liczba została zmieniona', thisWidget.input.value);
@@ -256,10 +258,10 @@
         thisWidget.setValue(thisWidget.value + 1);
         console.log('link Decrease');
       });
-      const settings.amountWidget.defaultMin = 0;
-      const settings.amountWidget.defaultMax = 10;
-      if (settings.amountWidget.defaultMin >= thisWidget.setValue <= settings.amountWidget.defaultMax){
-        console.log('Wartość z zakresu', setValue);
+      const defaultMin = thisWidget.element.querySelector('.settings .amountWidget.defaultMin');
+      const defaultMax = thisWidget.element.querySelector('.settings .amountWidget.defaultMax');
+      if (defaultMin >= thisWidget.setValue <= defaultMax){
+        console.log('Wartość z zakresu', thisWidget.setValue);
       } else {
         console.log('wartość z poza zakresu');
         thisWidget.setValue(0);
