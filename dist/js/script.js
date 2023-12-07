@@ -98,7 +98,7 @@
 
       /*referencje do diva z obrazkami*/
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-   
+
       /* [NEW] referencje dla nowej klasy AmountWidget*/
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
 
@@ -154,10 +154,10 @@
     initAmountWidget() {
       const thisProduct = this;
 
-      thisProduct.amountWidget= new AmountWidget(thisProduct.amountWidgetElem);
-      
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+
     }
-    
+
 
     processOrder() {
       const thisProduct = this;
@@ -187,13 +187,13 @@
             price += option.price;
           }
 
-           //[NEW]finding the image with thr class .paramId-optionId in the div with the images
+          //[NEW]finding the image with thr class .paramId-optionId in the div with the images
           const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
           //console.log(optionImage);
 
           if (optionImage) {
-             //chekong if this option selected in our form
-            if(formData[paramId] && formData[paramId].includes(optionId)) {
+            //chekong if this option selected in our form
+            if (formData[paramId] && formData[paramId].includes(optionId)) {
               optionImage.classList.add('active');
             }
             else {
@@ -207,47 +207,47 @@
     }
   }
 
-//Dodanie kolejnej klasy (Moduł 9)
-//Klasa AmountWidget używana dla zmiany wartości/ilości produktów za pomocą inputa lub przycisków "+" i "-"
-class AmountWidget{
-  constructor(element){
-    const thisWidget = this;
+  //Dodanie kolejnej klasy (Moduł 9)
+  //Klasa AmountWidget używana dla zmiany wartości/ilości produktów za pomocą inputa lub przycisków "+" i "-"
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
 
-    thisWidget.getElements(element);
+      thisWidget.getElements(element);
 
-    console.log('AmountWidget:', thisWidget);
-    console.log('constructor argument:', element);
-  }
-  getElements(element){
-    const thisWidget = this;
-  
-    thisWidget.element = element;
-    thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
-    thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
-    thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
-  
-    thisWidget.setValue(thisWidget.input.value);
-  }
-  setValue(value){
-    const thisWidget = this;
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor argument:', element);
+    }
+    getElements(element) {
+      const thisWidget = this;
 
-    const newValue = parseInt(value);
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
 
-    /*TO DO : Add validation*/
-    if (thisWidget.value !== newValue && !isNaN(newValue)){
-      thisWidget.value = newValue;
-    } 
-    
-    thisWidget.value = newValue;
-    thisWidget.input.value = thisWidget.value;
-  }
-  initActions(){
-    thisWidget.input.addEventListener('Change', function ()){
       thisWidget.setValue(thisWidget.input.value);
-      console.log('Liczba została zmieniona', thisWidget.input.value);
+    }
+    setValue(value) {
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      /*TO DO : Add validation*/
+      if (thisWidget.value !== newValue && !isNaN(newValue)) {
+        thisWidget.value = newValue;
+      }
+
+      thisWidget.value = newValue;
+      thisWidget.input.value = thisWidget.value;
+    }
+    initActions() {
+      thisWidget.input.addEventListener('change', function () {
+        thisWidget.setValue(thisWidget.input.value);
+        console.log('Liczba została zmieniona', thisWidget.input.value);
+      });
     }
   }
-}
 
   const app = {
     initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/

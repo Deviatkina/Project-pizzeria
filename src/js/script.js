@@ -242,10 +242,10 @@
       thisWidget.input.value = thisWidget.value;
     }
     initActions() {
-      thisWidget.input.addEventListener('Change', function ()){
+      thisWidget.input.addEventListener('change', function () {
         thisWidget.setValue(thisWidget.input.value);
         console.log('Liczba została zmieniona', thisWidget.input.value);
-      }
+      });
     }
   }
 
