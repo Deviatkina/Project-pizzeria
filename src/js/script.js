@@ -217,6 +217,8 @@
 
       console.log('AmountWidget:', thisWidget);
       console.log('constructor argument:', element);
+      
+      thisWidget.initActions();
     }
     getElements(element) {
       const thisWidget = this;
@@ -245,6 +247,14 @@
       thisWidget.input.addEventListener('change', function () {
         thisWidget.setValue(thisWidget.input.value);
         console.log('Liczba została zmieniona', thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', function(){
+        thisWidget.setValue(thisWidget.value - 1);
+        console.log('link Decrease');
+      });
+      thisWidget.linkDecrease.addEventListener('click', function(){
+        thisWidget.setValue(thisWidget.value + 1);
+        console.log('link Decrease');
       });
     }
   }
