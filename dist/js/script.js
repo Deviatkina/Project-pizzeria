@@ -217,8 +217,8 @@
 
       console.log('AmountWidget:', thisWidget);
       console.log('constructor argument:', element);
-
-      thisWidget.initActions(value);
+      
+      
     }
     getElements(element) {
       const thisWidget = this;
@@ -235,7 +235,7 @@
 
       const newValue = parseInt(value);
 
-      /*TO DO : Add validation*/
+      /*Done : Add validation*/
       if (thisWidget.value !== newValue && !isNaN(newValue)) {
         thisWidget.value = newValue;
       }
@@ -243,7 +243,7 @@
       thisWidget.value = newValue;
       thisWidget.input.value = thisWidget.value;
     }
-    initActions(value) {
+    initActions() {
       thisWidget.input.addEventListener('change', function () {
         thisWidget.setValue(thisWidget.input.value);
         console.log('Liczba została zmieniona', thisWidget.input.value);
@@ -256,6 +256,7 @@
         thisWidget.setValue(thisWidget.value + 1);
         console.log('link Decrease');
       });
+      thisWidget.initActions();
     }
   }
 

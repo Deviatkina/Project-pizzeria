@@ -235,7 +235,7 @@
 
       const newValue = parseInt(value);
 
-      /*TO DO : Add validation*/
+      /*Done : Add validation*/
       if (thisWidget.value !== newValue && !isNaN(newValue)) {
         thisWidget.value = newValue;
       }
@@ -256,6 +256,14 @@
         thisWidget.setValue(thisWidget.value + 1);
         console.log('link Decrease');
       });
+      const settings.amountWidget.defaultMin = 0;
+      const settings.amountWidget.defaultMax = 10;
+      if (settings.amountWidget.defaultMin >= thisWidget.setValue <= settings.amountWidget.defaultMax){
+        console.log('Wartość z zakresu', setValue);
+      } else {
+        console.log('wartość z poza zakresu');
+        thisWidget.setValue(0);
+      }
     }
   }
 
