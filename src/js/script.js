@@ -204,6 +204,9 @@
           }
         }
       }
+      /* [NEW for inside event listener] multiply price by amount */
+      price *= thisProduct.amountWidget.value;
+      
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
    }
@@ -266,7 +269,8 @@
       announce() {
         const thisWidget = this;
   
-        thisWidget.element.dispatchEvent(new CustomEvent('updated'));
+        const event = new Event('updated');
+        thisWidget.element.dispatchEvent(event);
     }
   }
 
