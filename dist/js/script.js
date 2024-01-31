@@ -246,8 +246,12 @@
         thisWidget.value = newValue;
       }
 
-      thisWidget.input.value = thisWidget.value;
+      if (thisWidget.value)
+        thisWidget.input.value = thisWidget.value;
+      else
+        thisWidget.input.value = settings.amountWidget.defaultValue;
       thisWidget.announce();
+
     }
     initActions() {
       const thisWidget = this;
