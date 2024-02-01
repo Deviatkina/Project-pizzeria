@@ -248,8 +248,10 @@
 
       if (thisWidget.value)
         thisWidget.input.value = thisWidget.value;
-      else
+      else {
         thisWidget.input.value = settings.amountWidget.defaultValue;
+        thisWidget.value = settings.amountWidget.defaultValue;
+      }
       thisWidget.announce();
 
     }
