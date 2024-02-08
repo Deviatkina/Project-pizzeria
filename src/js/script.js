@@ -313,6 +313,21 @@ const templates = {
         thisWidget.element.dispatchEvent(event);
     }
   }
+/* Dodawanie klasy Cart (dla utworzenia koszyka)*/
+class Cart{
+  constructor(element){
+    const thisCart = this;
+    thisCart.products = [];
+    thisCart.getElement(element);
+    console.log('new Cart', thisCart);
+  }
+
+  getElements(element){
+    const thisCart = this;
+    thisCart.dom = {};
+    thisCart.dom.wrapper = element;
+  }
+}
 
   const app = {
     initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/
