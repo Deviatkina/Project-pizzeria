@@ -333,15 +333,14 @@ class Cart{
 
   initAction(){
     const thisCart = this;
-    const clickableTrigger = thisCart.dom.querySelector(select.cart.clicable);
+    const clickableTrigger = thisCart.dom.wrapper.querySelector(select.cart.clickable);
 
-    clickableTrigger.addEventListener('click', function(event){
+    clickableTrigger.addEventListener('click', function(event) {
       event.preventDefault();
-    })
-    thisCart.dom.wrapper.classList.toggle('active');
+      thisCart.dom.wrapper.classList.toggle('active');
+    });
   }
 }
-
   const app = {
     initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/
       const thisApp = this;
@@ -350,13 +349,14 @@ class Cart{
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
       }
-    },
-    initCart: function () { /*Dodano instancja do klasy Cart (Koszyk) */
+    initCart: function(){ /*Dodano instancja do klasy Cart (Koszyk) */
       const thisApp = this;
 
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
+  }
     },
+    
 
     /*Część kodu, która będzie potem odpowiadała za wczytywanie informacji o produktach do aplikacji z serwera*/
     initData: function () {
@@ -377,9 +377,8 @@ class Cart{
 
       thisApp.initMenu();
 
+      thisApp.initCart();
     },
-
-
   };
   app.init();
 }
