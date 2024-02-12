@@ -327,6 +327,18 @@ class Cart{
     const thisCart = this;
     thisCart.dom = {};
     thisCart.dom.wrapper = element;
+
+    thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger.clikable);
+  }
+
+  initAction(){
+    const thisCart = this;
+    const clickableTrigger = thisCart.dom.querySelector(select.cart.clicable);
+
+    clickableTrigger.addEventListener('click', function(event){
+      event.preventDefault();
+    })
+    thisCart.dom.wrapper.classList.toggle('active');
   }
 }
 
