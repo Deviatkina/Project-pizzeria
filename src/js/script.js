@@ -318,8 +318,9 @@ class Cart{
   constructor(element){
     const thisCart = this;
     thisCart.products = [];
-    thisCart.getElement(element);
-    console.log('new Cart', thisCart);
+    thisCart.getElements(element);
+    thisCart.initAction();
+    console.log('thisCart', thisCart);
 
   }
 
@@ -328,14 +329,12 @@ class Cart{
     thisCart.dom = {};
     thisCart.dom.wrapper = element;
 
-    thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger.clikable);
+    thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
   }
 
   initAction(){
     const thisCart = this;
-    const clickableTrigger = thisCart.dom.wrapper.querySelector(select.cart.clickable);
-
-    clickableTrigger.addEventListener('click', function(event) {
+    thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
       event.preventDefault();
       thisCart.dom.wrapper.classList.toggle('active');
     });
@@ -348,14 +347,14 @@ class Cart{
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
-      }
+    }
+  },
     initCart: function(){ /*Dodano instancja do klasy Cart (Koszyk) */
       const thisApp = this;
 
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
-  }
-    },
+},
     
 
     /*Część kodu, która będzie potem odpowiadała za wczytywanie informacji o produktach do aplikacji z serwera*/
