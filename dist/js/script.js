@@ -313,6 +313,22 @@ const templates = {
         thisWidget.element.dispatchEvent(event);
     }
   }
+/* Dodawanie klasy Cart (dla utworzenia koszyka)*/
+class Cart{
+  constructor(element){
+    const thisCart = this;
+    thisCart.products = [];
+    thisCart.getElement(element);
+    console.log('new Cart', thisCart);
+
+  }
+
+  getElements(element){
+    const thisCart = this;
+    thisCart.dom = {};
+    thisCart.dom.wrapper = element;
+  }
+}
 
   const app = {
     initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/
@@ -322,6 +338,12 @@ const templates = {
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
       }
+    },
+    initCart: function () { /*Dodano instancja do klasy Cart (Koszyk) */
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
     },
 
     /*Część kodu, która będzie potem odpowiadała za wczytywanie informacji o produktach do aplikacji z serwera*/
@@ -342,6 +364,7 @@ const templates = {
       thisApp.initData();
 
       thisApp.initMenu();
+
     },
 
 

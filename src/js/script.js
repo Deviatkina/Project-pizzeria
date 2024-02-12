@@ -320,6 +320,7 @@ class Cart{
     thisCart.products = [];
     thisCart.getElement(element);
     console.log('new Cart', thisCart);
+
   }
 
   getElements(element){
@@ -337,6 +338,12 @@ class Cart{
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
       }
+    },
+    initCart: function () { /*Dodano instancja do klasy Cart (Koszyk) */
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
     },
 
     /*Część kodu, która będzie potem odpowiadała za wczytywanie informacji o produktach do aplikacji z serwera*/
@@ -357,6 +364,7 @@ class Cart{
       thisApp.initData();
 
       thisApp.initMenu();
+
     },
 
 
