@@ -347,7 +347,7 @@ class Cart{
   }
 }
   const app = {
-    initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/
+    initMenu: function() { /*Dodano instancje do każdego elementu z klasy Product*/
       const thisApp = this;
       console.log('thisApp.data:', thisApp.data);
 
@@ -355,22 +355,21 @@ class Cart{
         new Product(productData, thisApp.data.products[productData]);
     }
   },
-    initCart: function(){ /*Dodano instancja do klasy Cart (Koszyk) */
+    initCart: function() { /*Dodano instancja do klasy Cart (Koszyk) */
       const thisApp = this;
 
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
-},
-    
-
+  },
+   
     /*Część kodu, która będzie potem odpowiadała za wczytywanie informacji o produktach do aplikacji z serwera*/
-    initData: function () {
+    initData: function() {
       const thisApp = this;
 
       thisApp.data = dataSource;
     },
 
-    init: function () {
+    init: function() {
       const thisApp = this;
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
@@ -386,6 +385,8 @@ class Cart{
     },
     add(menuProduct){
     //const thisCart = this;
+    const thisCart = this;
+    thisCart.products.add(menuProduct);
     console.log('adding product', menuProduct);
   }
   };
