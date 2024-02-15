@@ -250,6 +250,14 @@ const templates = {
 
     app.cart.add(thisProduct);
    }
+   prepareCartProduct(){
+    const thisProduct = this;
+    const productSummary = {
+      id: thisProduct.id,
+      name: thisProduct.name,
+      amount: thisProduct.amount,
+    };
+   }
   }
   //Dodanie kolejnej klasy (Moduł 9)
   //Klasa AmountWidget używana dla zmiany wartości/ilości produktów za pomocą inputa lub przycisków "+" i "-"
@@ -327,9 +335,7 @@ class Cart{
     thisCart.getElements(element);
     thisCart.initAction();
     console.log('thisCart', thisCart);
-
   }
-
   getElements(element){
     const thisCart = this;
     thisCart.dom = {};
@@ -337,13 +343,18 @@ class Cart{
 
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
   }
-
   initAction(){
     const thisCart = this;
     thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
       event.preventDefault();
       thisCart.dom.wrapper.classList.toggle('active');
     });
+  }
+  add(menuProduct){
+    //const thisCart = this;
+    const thisCart = this;
+    thisCart.products.push(menuProduct);
+    console.log('adding product', menuProduct);
   }
 }
   const app = {
@@ -368,7 +379,6 @@ class Cart{
 
       thisApp.data = dataSource;
     },
-
     init: function() {
       const thisApp = this;
       console.log('*** App starting ***');
@@ -383,14 +393,8 @@ class Cart{
 
       thisApp.initCart();
     },
-    add(menuProduct){
-    //const thisCart = this;
-    const thisCart = this;
-    thisCart.products.add(menuProduct);
-    console.log('adding product', menuProduct);
-  }
-  };
-
+    
+};
 
   app.init();
 }
