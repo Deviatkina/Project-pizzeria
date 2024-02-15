@@ -241,6 +241,9 @@ const templates = {
       }
       /* [NEW for inside event listener] multiply price by amount */
       price *= thisProduct.amountWidget.value;
+
+      thisProduct.priceSingle = price;
+        //console.log('cena pojedyncza', thisProduct.priceSingle);
       
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
@@ -248,15 +251,20 @@ const templates = {
    addToCart() {
     const thisProduct = this;
 
-    app.cart.add(thisProduct);
+    app.cart.add(thisProduct.prepareCartProduct);
    }
    prepareCartProduct(){
     const thisProduct = this;
-    const productSummary = {
+      productSummary = {
       id: thisProduct.id,
       name: thisProduct.name,
       amount: thisProduct.amount,
+      priceSingle: thisProduct.priceSingle,
+      price: thisProduct.priceSingle*thisProduct.amount,
+      params: thisProduct.params,
     };
+    //console.log(price);
+    return productSummary; 
    }
   }
   //Dodanie kolejnej klasy (Moduł 9)
@@ -333,7 +341,7 @@ class Cart{
     const thisCart = this;
     thisCart.products = [];
     thisCart.getElements(element);
-    thisCart.initAction();
+    thisCart.initActions();
     console.log('thisCart', thisCart);
   }
   getElements(element){
@@ -343,7 +351,7 @@ class Cart{
 
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
   }
-  initAction(){
+  initActions(){
     const thisCart = this;
     thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
       event.preventDefault();
