@@ -181,6 +181,7 @@ const templates = {
       thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
     }
 
@@ -243,6 +244,11 @@ const templates = {
       
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
+   }
+   addToCart() {
+    const thisProduct = this;
+
+    app.cart.add(thisProduct);
    }
   }
   //Dodanie kolejnej klasy (Moduł 9)
@@ -378,6 +384,12 @@ class Cart{
 
       thisApp.initCart();
     },
+    add(menuProduct){
+    //const thisCart = this;
+    console.log('adding product', menuProduct);
+  }
   };
+
+
   app.init();
 }
