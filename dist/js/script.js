@@ -242,6 +242,7 @@ const templates = {
       /* [NEW for inside event listener] multiply price by amount */
       price *= thisProduct.amountWidget.value;
 
+      //?? thisProduct.priceS = thisProduct.data.price;
       thisProduct.priceSingle = price;
         //console.log('cena pojedyncza', thisProduct.priceSingle);
       
@@ -250,17 +251,17 @@ const templates = {
    }
    addToCart() {
     const thisProduct = this;
-
-    app.cart.add(thisProduct.prepareCartProduct);
+    
+    app.cart.add(thisProduct.prepareCartProduct());
    }
    prepareCartProduct(){
     const thisProduct = this;
-      productSummary = {
+    const productSummary = {
       id: thisProduct.id,
-      name: thisProduct.name,
-      amount: thisProduct.amount,
+      name: thisProduct.data.name,
+      amount: thisProduct.amountWidget.value,
       priceSingle: thisProduct.priceSingle,
-      price: thisProduct.priceSingle*thisProduct.amount,
+      price: thisProduct.priceSingle*thisProduct.amountWidget.value,
       params: thisProduct.params,
     };
     //console.log(price);
