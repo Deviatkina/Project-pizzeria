@@ -239,13 +239,13 @@ const templates = {
           }
         }
       }
-      /* [NEW for inside event listener] multiply price by amount */
-      price *= thisProduct.amountWidget.value;
-
       //?? thisProduct.priceS = thisProduct.data.price;
       thisProduct.priceSingle = price;
         //console.log('cena pojedyncza', thisProduct.priceSingle);
       
+        /* [NEW for inside event listener] multiply price by amount */
+      price *= thisProduct.amountWidget.value;
+
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
    }
