@@ -265,7 +265,7 @@ class Product {
       amount: thisProduct.amountWidget.value,
       priceSingle: thisProduct.priceSingle,
       price: thisProduct.priceSingle*thisProduct.amountWidget.value,
-      params: thisProduct.productParams,
+      params: thisProduct.params,
     };
     //console.log(price);
     return productSummary; 
