@@ -257,7 +257,7 @@ class Product {
     const thisProduct = this;
 
     const productParams = thisProduct.prepareCartProductParams();
-    console.log('productParams', productParams)
+    //console.log('productParams', productParams)
 
     const productSummary = {
       id: thisProduct.id,
@@ -265,15 +265,16 @@ class Product {
       amount: thisProduct.amountWidget.value,
       priceSingle: thisProduct.priceSingle,
       price: thisProduct.priceSingle*thisProduct.amountWidget.value,
-      params: thisProduct.params,
+      //params: thisProduct.prepareCartProductParams,
+      params: productParams,
     };
-    //console.log(price);
     return productSummary; 
    }
   prepareCartProductParams(){
     const thisProduct = this;
 
     const formData = utils.serializeFormToObject(thisProduct.form);
+
     const params = {};
     
     // for very category (param)
@@ -298,9 +299,7 @@ class Product {
           }
         }
       }
-
     return params;
-    
   }
 }
   //Dodanie kolejnej klasy (Moduł 9)
