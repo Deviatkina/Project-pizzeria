@@ -86,27 +86,27 @@ const templates = {
   // CODE ADDED END
 };
   /*Dodajemy klasę Product*/
-  class Product {
-    constructor(id, data) {
-      const thisProduct = this;
+class Product {
+  constructor(id, data) {
+    const thisProduct = this;
 
-      thisProduct.id = id;
-      thisProduct.data = data;
-      thisProduct.renderInMenu();
+    thisProduct.id = id;
+    thisProduct.data = data;
+    thisProduct.renderInMenu();
 
-      thisProduct.getElements();
+    thisProduct.getElements();
 
-      thisProduct.initAccordion();
-      thisProduct.initOrderForm();
+    thisProduct.initAccordion();
+    thisProduct.initOrderForm();
 
-      //[NEW] wywolujemy metodę initAmountWidget
-      thisProduct.initAmountWidget();
+    //[NEW] wywolujemy metodę initAmountWidget
+    thisProduct.initAmountWidget();
 
-      thisProduct.processOrder();
+    thisProduct.processOrder();
 
-      console.log('new Product:', thisProduct);
-    }
-    renderInMenu() {
+    console.log('new Product:', thisProduct);
+  }
+  renderInMenu() {
       const thisProduct = this;
 
       /* generate HTML based on template */
@@ -120,8 +120,8 @@ const templates = {
 
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
-    }
-    getElements() {
+  }
+  getElements() {
       const thisProduct = this;
 
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
@@ -136,9 +136,9 @@ const templates = {
       /* [NEW] referencje dla nowej klasy AmountWidget*/
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
 
-    }
+  }
 
-    initAccordion() {
+  initAccordion() {
       /*Dodanie metody initAccordion */
       const thisProduct = this;
       //console.log(thisProduct);
@@ -162,8 +162,8 @@ const templates = {
         /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle('active');
       });
-    }
-    initOrderForm() {
+  }
+  initOrderForm() {
       const thisProduct = this;
       //console.log(thisProduct);
 
@@ -183,10 +183,10 @@ const templates = {
         thisProduct.processOrder();
         thisProduct.addToCart();
       });
-    }
+  }
 
-    //[NEW to AmountWidget class]
-    initAmountWidget() {
+  //[NEW to AmountWidget class]
+  initAmountWidget() {
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
@@ -239,7 +239,6 @@ const templates = {
           }
         }
       }
-      //?? thisProduct.priceS = thisProduct.data.price;
       thisProduct.priceSingle = price;
         //console.log('cena pojedyncza', thisProduct.priceSingle);
       
@@ -256,18 +255,54 @@ const templates = {
    }
    prepareCartProduct(){
     const thisProduct = this;
+
+    const productParams = thisProduct.prepareCartProductParams();
+    console.log('productParams', productParams)
+
     const productSummary = {
       id: thisProduct.id,
       name: thisProduct.data.name,
       amount: thisProduct.amountWidget.value,
       priceSingle: thisProduct.priceSingle,
       price: thisProduct.priceSingle*thisProduct.amountWidget.value,
-      params: thisProduct.params,
+      params: thisProduct.productParams,
     };
     //console.log(price);
     return productSummary; 
    }
+  prepareCartProductParams(){
+    const thisProduct = this;
+
+    const formData = utils.serializeFormToObject(thisProduct.form);
+    const params = {};
+    
+    // for very category (param)
+    for(let paramId in thisProduct.data.params) {
+      const param = thisProduct.data.params[paramId];
+
+      // create category param in params const eg. params = { ingredients: { name: 'Ingredients', options: {}}}
+      params[paramId] = {
+        label: param.label,
+        options: {}
+      }
+
+      // for every option in this category
+      for(let optionId in param.options) {
+        const option = param.options[optionId];
+        const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+          //cheking if this option selected in our form
+          if(optionSelected) {
+            // option is selected!
+            params[paramId].options[optionId] = option;
+          }
+        }
+      }
+
+    return params;
+    
   }
+}
   //Dodanie kolejnej klasy (Moduł 9)
   //Klasa AmountWidget używana dla zmiany wartości/ilości produktów za pomocą inputa lub przycisków "+" i "-"
   class AmountWidget {
