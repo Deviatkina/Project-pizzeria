@@ -295,7 +295,7 @@ class Product {
           //cheking if this option selected in our form
           if(optionSelected) {
             // option is selected!
-            params[paramId].options[optionId] = option;
+            params[paramId].options[optionId] = optionId;
           }
         }
       }
@@ -397,9 +397,7 @@ class Cart{
   }
   add(menuProduct){
     const thisCart = this;
-    thisCart.products.push(menuProduct);
-    console.log('adding product', menuProduct);
-
+    
     /* generate HTML based on template */
     const generatedHTML = templates.cartProduct(menuProduct);
 
@@ -411,6 +409,9 @@ class Cart{
 
     /* add element to menu */
     cartContainer.appendChild(thisCart.element);
+
+    thisCart.products.push(menuProduct);
+    console.log('thisCart.products', thisCart.products);
   }
 }
   const app = {
@@ -451,6 +452,30 @@ class Cart{
     },
     
 };
+
+class CartProduct {
+  constructor (menuProduct, element) {
+    const thisCartProduct = this;
+    thisCartProduct.menuProduct = [];
+    thisCartProduct.getElements(element);
+   //console.log('new Cart Product', thisCartProduct);
+  }
+    getElements(element){
+      const thisCartProduct = this;
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+
+      //console.log('thisCartProduct', thisCartProduct);
+  }
+}
 
   app.init();
 }
