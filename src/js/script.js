@@ -295,7 +295,7 @@ class Product {
           //cheking if this option selected in our form
           if(optionSelected) {
             // option is selected!
-            params[paramId].options[optionId] = optionId;
+            params[paramId].options[optionId] = option.label;
           }
         }
       }
@@ -405,13 +405,55 @@ class Cart{
     thisCart.element = utils.createDOMFromHTML(generatedHTML);
 
     /* find menu container */
-    const cartContainer = document.querySelector(select.containerOf.cart);
+    const cartContainer = document.querySelector(select.cart.productList);
 
     /* add element to menu */
     cartContainer.appendChild(thisCart.element);
 
-    thisCart.products.push(menuProduct, /*generatedDOM*/);
+    thisCart.products.push(menuProduct);
     console.log('thisCart.products', thisCart.products);
+  }
+}
+class CartProduct {
+  constructor (menuProduct, element) {
+    const thisCartProduct = this;
+
+    thisCartProduct.id = menuProduct.id;
+    thisCartProduct.name = menuProduct.name;
+    thisCartProduct.amount = menuProduct.amount;
+    thisCartProduct.price = menuProduct.price;
+    thisCartProduct.priceSingle = menuProduct.priceSingle;
+    thisCartProduct.params = menuProduct.params;
+
+    thisCartProduct.getElements(element);
+    thisCartProduct.initAmountWidget();
+
+    console.log('new Cart Product', thisCartProduct);
+  }
+    getElements(element){
+      const thisCartProduct = this;
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+
+      //console.log('thisCartProduct', thisCartProduct);
+  }
+  initAmountWidget() {
+    const thisCartProduct = this;
+
+    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+    thisCartProduct.dom.amountWidget.addEventListener('updated', function() {
+      thisCartProduct.amount = thisCartProduct.amountWidget.value;
+      thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
+      thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+    });
   }
 }
   const app = {
@@ -452,45 +494,6 @@ class Cart{
     },
     
 };
-
-class CartProduct {
-  constructor (menuProduct, element) {
-    const thisCartProduct = this;
-    thisCartProduct.menuProduct = thisCart.add(menuProduct);
-    thisCartProduct.getElements(element);
-    thisCartProduct.initAmountWidget();
-
-    console.log('new Cart Product', thisCartProduct);
-  }
-    getElements(element){
-      const thisCartProduct = this;
-      thisCartProduct.dom = {};
-      thisCartProduct.dom.wrapper = element;
-
-      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
-
-      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
-
-      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
-      
-      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
-
-      thisCartProduct.amountWidgetElem = thisCartProduct.element.querySelector(select.cartProduct.amountWidget);
-      thisCartProduct.priceElem = thisCartProduct.element.querySelector(select.cartProduct.priceElem);
-
-      //console.log('thisCartProduct', thisCartProduct);
-  }
-  initAmountWidget() {
-    const thisCartProduct = this;
-
-    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidgetElem);
-
-    thisCartProduct.amountWidgetElem.addEventListener('updated', function() {
-      thisProduct.processOrder();
-      console.log('amountWidget', thisCartProduct.amountWidget);
-    });
-  }
-}
 
   app.init();
 }
