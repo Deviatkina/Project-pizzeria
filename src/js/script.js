@@ -1,3 +1,4 @@
+
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
@@ -387,6 +388,8 @@ class Cart{
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
   
     thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+    thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
+    thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
   }
   initActions(){
     const thisCart = this;
@@ -410,11 +413,31 @@ class Cart{
     /* add element to menu */
     cartContainer.appendChild(thisCart.element);
 
-    thisCart.products.push(menuProduct);
+    thisCart.products.push(new CartProduct(menuProduct, thisCart.element));
+
+    thisCart.update();
     console.log('thisCart.products', thisCart.products);
   }
+
+  update() {
+    const thisCart = this;
+
+    thisCart.totalPrice = 0;
+    thisCart.totalNumber = 0; 
+
+    for(const cartProduct of thisCart.products) {
+      thisCart.totalPrice = thisCart.totalPrice + cartProduct.price;
+      thisCart.totalNumber = thisCart.totalNumber + cartProduct.amount;
+    }
+
+    thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
+    thisCart.dom.totalPrice[0].innerHTML = thisCart.totalPrice;
+    thisCart.dom.totalPrice[1].innerHTML = thisCart.totalPrice;
+  }
 }
+
 class CartProduct {
+
   constructor (menuProduct, element) {
     const thisCartProduct = this;
 
@@ -445,6 +468,7 @@ class CartProduct {
 
       //console.log('thisCartProduct', thisCartProduct);
   }
+
   initAmountWidget() {
     const thisCartProduct = this;
 
@@ -456,6 +480,7 @@ class CartProduct {
     });
   }
 }
+
   const app = {
     initMenu: function() { /*Dodano instancje do każdego elementu z klasy Product*/
       const thisApp = this;
