@@ -105,7 +105,7 @@ class Product {
 
     thisProduct.processOrder();
 
-    console.log('new Product:', thisProduct);
+    //console.log('new Product:', thisProduct);
   }
   renderInMenu() {
       const thisProduct = this;
@@ -312,8 +312,8 @@ class Product {
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
 
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor argument:', element);
+      //console.log('AmountWidget:', thisWidget);
+      //console.log('constructor argument:', element);
       
       thisWidget.initActions();
       thisWidget.announce();
@@ -378,7 +378,7 @@ class Cart{
     thisCart.products = [];
     thisCart.getElements(element);
     thisCart.initActions();
-    console.log('thisCart', thisCart);
+    //console.log('thisCart', thisCart);
   }
   getElements(element){
     const thisCart = this;
@@ -390,6 +390,7 @@ class Cart{
     thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
+    thisCart.dom.deliveryFree = thisCart.dom.wrapper.querySelector(settings.cart.deliveryFree)
   }
   initActions(){
     const thisCart = this;
@@ -422,8 +423,9 @@ class Cart{
   update() {
     const thisCart = this;
 
+    thisCart.deliveryFree = document.querySelector(settings.cart.deliveryFree);
+    thisCart.totalNumber = 0;
     thisCart.totalPrice = 0;
-    thisCart.totalNumber = 0; 
 
     for(const cartProduct of thisCart.products) {
       thisCart.totalPrice = thisCart.totalPrice + cartProduct.price;
@@ -484,7 +486,7 @@ class CartProduct {
   const app = {
     initMenu: function() { /*Dodano instancje do każdego elementu z klasy Product*/
       const thisApp = this;
-      console.log('thisApp.data:', thisApp.data);
+      //console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
@@ -505,11 +507,11 @@ class CartProduct {
     },
     init: function() {
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
 
       thisApp.initData();
 
