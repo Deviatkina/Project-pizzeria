@@ -548,7 +548,7 @@ class CartProduct {
       //console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
-        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);;
+        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
     }
   },
     initCart: function() { /*Dodano instancja do klasy Cart (Koszyk) */
