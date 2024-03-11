@@ -579,7 +579,7 @@ class CartProduct {
           /* execute initMenu methos */
           thisApp.initMenu();
         });
-        
+              
       console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
     init: function() {
