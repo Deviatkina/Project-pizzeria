@@ -399,6 +399,9 @@ class Cart{
     thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
     thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
     thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
+
+    //Added code for "Order"
+    thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
   }
   initActions(){
     const thisCart = this;
@@ -422,6 +425,14 @@ class Cart{
 
       thisCart.update();
     });
+
+    //dodajemy nasłuchiwacza do 'submit'
+    thisCart.dom.form.addEventListener('submit', function(event){
+      event.preventDefault();
+      
+      const thisCart = this;
+      thisCart.sendOrder();
+    })
   }
   add(menuProduct){
     const thisCart = this;
@@ -467,8 +478,8 @@ class Cart{
     thisCart.dom.totalPrice[1].innerHTML = thisCart.totalPrice;
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
-
   }
+
 }
 
 class CartProduct {
@@ -548,7 +559,7 @@ class CartProduct {
       //console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
-        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);;
+        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
     }
   },
     initCart: function() { /*Dodano instancja do klasy Cart (Koszyk) */
