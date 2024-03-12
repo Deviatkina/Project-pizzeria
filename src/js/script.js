@@ -402,6 +402,9 @@ class Cart{
 
     //Added code for "Order"
     thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+
+    thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
+    thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
   }
   initActions(){
     const thisCart = this;
@@ -432,6 +435,10 @@ class Cart{
       
       const thisCart = this;
       thisCart.sendOrder();
+
+      const url = settings.db.url + '/' + settings.db.orders;
+
+      
     })
   }
   add(menuProduct){
