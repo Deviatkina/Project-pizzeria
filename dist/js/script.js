@@ -485,6 +485,32 @@ class Cart{
     thisCart.dom.totalPrice[1].innerHTML = thisCart.totalPrice;
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+
+    // kod dla Order
+    /*payload.products = [];
+      payload = {
+        address: thisCart.dom.address,
+        phone: thisCart.dom.phone,
+        totalPrice: thisCart.totalPrice,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        products: thisCart.products 
+      }
+    for(let prod of thisCart.products) {
+      payload.products.push(prod.getData());
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options);
+    
+      */
   }
 
 }
