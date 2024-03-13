@@ -1,4 +1,3 @@
-
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
@@ -433,12 +432,8 @@ class Cart{
     thisCart.dom.form.addEventListener('submit', function(event){
       event.preventDefault();
       
-      const thisCart = this;
       thisCart.sendOrder();
 
-      const url = settings.db.url + '/' + settings.db.orders;
-
-      
     })
   }
   add(menuProduct){
@@ -485,21 +480,29 @@ class Cart{
     thisCart.dom.totalPrice[1].innerHTML = thisCart.totalPrice;
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+  }
+
+  sendOrder(){
+
+    const thisCart = this;
+    
+    const url = settings.db.url + '/' + settings.db.orders;
 
     // kod dla Order
-    /*payload.products = [];
-      payload = {
-        address: thisCart.dom.address,
-        phone: thisCart.dom.phone,
+    const payload = {
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
         totalPrice: thisCart.totalPrice,
         subtotalPrice: thisCart.subtotalPrice,
         totalNumber: thisCart.totalNumber,
         deliveryFee: thisCart.deliveryFee,
-        products: thisCart.products 
-      }
+    }
+    payload.products = [];
+
     for(let prod of thisCart.products) {
       payload.products.push(prod.getData());
     }
+
     const options = {
       method: 'POST',
       headers: {
@@ -508,9 +511,10 @@ class Cart{
       body: JSON.stringify(payload),
     };
 
-    fetch(url, options);
-    
-      */
+    fetch(url, options)
+    .then(function(){
+      alert('Zamówienie zostało złożone!');
+    })
   }
 
 }
@@ -583,6 +587,22 @@ class CartProduct {
       event.preventDefault();
       thisCartProduct.remove();
     });
+  }
+
+  getData() {
+    const thisCartProduct = this;
+
+    const payload = {
+      id: thisCartProduct.id,
+      amount: thisCartProduct.amount,
+      price: thisCartProduct.price,
+      priceSingle: thisCartProduct.priceSingle,
+      name: thisCartProduct.name,
+      params: thisCartProduct.params,
+    };
+
+    return payload;
+  
   }
 }
 
