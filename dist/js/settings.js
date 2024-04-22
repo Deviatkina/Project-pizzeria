@@ -1,7 +1,7 @@
 export const select = {
     templateOf: {
         menuProduct: '#template-menu-product',
-        cartProduct: '#template-cart-product', 
+        cartProduct: '#template-cart-product',
         bookingWidget: '#template-booking-widget',// CODE ADDED
     },
     containerOf: {
@@ -38,14 +38,14 @@ export const select = {
             input: 'input[type="range"]',
             output: '.output',
         },
-        booking: {
-            peopleAmount: '.people-amount',
-            hoursAmount: '.hours-amount',
-            tables: '.floor-plan .table',
-        },
-        nav: {
-            links: '.main-nav a',
-        },
+    },
+    booking: {
+        peopleAmount: '.people-amount',
+        hoursAmount: '.hours-amount',
+        tables: '.floor-plan .table',
+    },
+    nav: {
+        links: '.main-nav a',
     },
     // CODE ADDED START
     cart: {
@@ -122,7 +122,7 @@ export const settings = {
         notRepeatParam: 'repeat=false',
         repeatParam: 'repeat_ne=false',
     },
-    
+
     // CODE ADDED END
 };
 
