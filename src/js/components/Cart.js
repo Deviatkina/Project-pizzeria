@@ -129,6 +129,10 @@ class Cart {
             payload.products.push(prod.getData());
         }
 
+        if (payload.address.length === 0 || payload.phone.length === 0 || payload.products.length === 0){
+            alert("Uzupełnij informacje dla zamówienia!")
+        } else {
+
         const options = {
             method: 'POST',
             headers: {
@@ -141,6 +145,7 @@ class Cart {
             .then(function () {
                 alert('Zamówienie zostało złożone!');
             })
+        }
     }
 
 }
