@@ -1,6 +1,7 @@
 import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 
 
 const app = {
@@ -46,8 +47,18 @@ const app = {
         classNames.nav.active, 
         link.getAttribute('href') == '#' + pageId);
     }
+  },
+
+  initBooking: function() {
+    const thisApp = this;
+
+    /* finding the contener for rezervation page*/
+    thisApp.bookingWrapper = document.querySelector(select.containerOf.booking);
+
+    
 
   },
+
   initMenu: function () { /*Dodano instancje do każdego elementu z klasy Product*/
     const thisApp = this;
     //console.log('thisApp.data:', thisApp.data);
@@ -108,6 +119,9 @@ const app = {
     /* Skasowano dla implementacji AJAX-a
     thisApp.initMenu();  */
     thisApp.initCart();
+
+    thisApp.initBooking();
+
   },
 };
 
