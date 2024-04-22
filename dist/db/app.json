@@ -204,60 +204,23 @@
   ],
   "orders": [
     {
-      "address": "1231254 v324",
-      "phone": "123123 13",
-      "totalPrice": 95,
-      "subtotalPrice": 75,
-      "totalNumber": 7,
+      "address": "",
+      "phone": "",
+      "totalPrice": 74,
+      "subtotalPrice": 54,
+      "totalNumber": 6,
       "deliveryFee": 20,
       "products": [
         {
           "id": "cake",
-          "amount": 4,
-          "price": 36,
+          "amount": 6,
+          "price": 54,
           "priceSingle": 9,
           "name": "Zio Stefano's Doughnut",
           "params": {}
-        },
-        {
-          "id": "salad",
-          "amount": 3,
-          "price": 39,
-          "priceSingle": 13,
-          "name": "Nonno Alberto's Salad",
-          "params": {
-            "ingredients": {
-              "label": "Ingredients",
-              "options": {
-                "cucumber": "Cucumber",
-                "tomatoes": "Tomatoes",
-                "olives": "Olives",
-                "herbs": "Fresh herbs"
-              }
-            }
-          }
         }
       ],
       "id": 1
-    },
-    {
-      "address": "124314124",
-      "phone": "123",
-      "totalPrice": 29,
-      "subtotalPrice": 9,
-      "totalNumber": 1,
-      "deliveryFee": 20,
-      "products": [
-        {
-          "id": "cake",
-          "amount": 1,
-          "price": 9,
-          "priceSingle": 9,
-          "name": "Zio Stefano's Doughnut",
-          "params": {}
-        }
-      ],
-      "id": 2
     }
   ]
 }
