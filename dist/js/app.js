@@ -55,7 +55,7 @@ const app = {
     /* finding the contener for rezervation page*/
     thisApp.bookingWrapper = document.querySelector(select.containerOf.booking);
 
-    
+    new Booking(thisApp.bookingWrapper);
 
   },
 

@@ -1,5 +1,5 @@
-//import AmountWidget from './AmountWidget.js';
-//import {select} from '../settings.js';
+import AmountWidget from './AmountWidget.js';
+import {select, templates} from '../settings.js';
 
 
 class Booking{
@@ -8,46 +8,34 @@ class Booking{
 
         thisBooking.wrapper = bookingWrapper;
 
-        thisBooking.render(bookingWrapper);
+        thisBooking.render();
+        thisBooking.getElements();
         thisBooking.initWidgets();
-
-        console.log('new Booking:', thisBooking);
     }
-
-    /*
-    getElements(bookingWrapper){
-        thisBooking= this;
+    
+    getElements(){
+        const thisBooking= this;
 
         thisBooking.dom = {};
 
+        thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount); //do diva osób
+        thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount); //do diva z godzinami
     }
     render() {
-        thisBooking= this;
+        const thisBooking= this;
 
         thisBooking.menuContainer = thisBooking.wrapper;
 
         thisBooking.generatedHTML = templates.bookingWidget();
 
-        menuContainer.innerHTML = thisBooking.generatedHTML;
-
-
+        thisBooking.menuContainer.innerHTML = thisBooking.generatedHTML;
 
     }
-    initWidget(){
-        thisBooking= this;
+    initWidgets(){
+        const thisBooking= this;
 
-        thisBooking.initWidget = new AmountWidget(thisBooking.dom.initWidget);
-
-        thisBooking.dom.initWidget. addEventListenet('updated', function() {
-            
-        });
-        thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
-
-        thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
-
+        thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
+        thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     }
-    
-    */
-
 }
 export default Booking;
