@@ -1,4 +1,6 @@
 //import AmountWidget from './AmountWidget.js';
+//import {select} from '../settings.js';
+
 
 class Booking{
     constructor (bookingWrapper){
@@ -12,10 +14,15 @@ class Booking{
         console.log('new Booking:', thisBooking);
     }
 
-    /*render() {
+    /*
+    getElements(bookingWrapper){
         thisBooking= this;
 
         thisBooking.dom = {};
+
+    }
+    render() {
+        thisBooking= this;
 
         thisBooking.menuContainer = thisBooking.wrapper;
 
@@ -23,7 +30,24 @@ class Booking{
 
         menuContainer.innerHTML = thisBooking.generatedHTML;
 
-    }*/
+
+
+    }
+    initWidget(){
+        thisBooking= this;
+
+        thisBooking.initWidget = new AmountWidget(thisBooking.dom.initWidget);
+
+        thisBooking.dom.initWidget. addEventListenet('updated', function() {
+            
+        });
+        thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
+
+        thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
+
+    }
+    
+    */
 
 }
 export default Booking;
