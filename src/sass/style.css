@@ -124,7 +124,6 @@ body {
   display: inline-block;
   border-width: 1px;
   border-style: solid;
-  padding: 12px;
   text-decoration: none;
   text-transform: uppercase;
   text-align: center;
@@ -152,7 +151,6 @@ body {
   display: inline-block;
   border-width: 1px;
   border-style: solid;
-  padding: 12px;
   text-decoration: none;
   text-transform: uppercase;
   text-align: center;
@@ -706,4 +704,4 @@ input.error, select.error {
   align-items: flex-start;
   justify-content: space-between;
   margin: 48px auto;
-}/*# sourceMappingURL=style.css.map */
+}
