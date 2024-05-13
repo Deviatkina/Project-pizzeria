@@ -18,15 +18,11 @@ class BaseWidget {
         if (thisWidget.value !== newValue && thisWidget.isValid(newValue)) {
             thisWidget.value = newValue;
             thisWidget.announce();
-        }
-
-        if (thisWidget.value)
-            thisWidget.dom.input.value = thisWidget.value;
-        else {
+        } else {
             thisWidget.dom.input.value = settings.amountWidget.defaultValue;
             thisWidget.value = settings.amountWidget.defaultValue;
         }
-
+    
         thisWidget.renderValue();
     }
 

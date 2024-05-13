@@ -18,7 +18,8 @@ class AmountWidget extends BaseWidget {
         
         //console.log('AmountWidget:', thisWidget);
         //console.log('constructor argument:', element);
-
+        thisWidget.setValue(thisWidget.dom.input.value || settings.amountWidget.defaultValue);
+        
     }
     getElements() {
         const thisWidget = this;
@@ -31,9 +32,7 @@ class AmountWidget extends BaseWidget {
     isValid(value) {
         return !isNaN(value) //sprawdzamy czy przekazana wartość jest nie liczbą
             && value <= settings.amountWidget.defaultMax
-            && value >= settings.amountWidget.defaultMin;
-
-            
+            && value >= settings.amountWidget.defaultMin;       
     }
 
     renderValue() {
@@ -47,15 +46,15 @@ class AmountWidget extends BaseWidget {
 
         thisWidget.dom.input.addEventListener('change', function () {
             thisWidget.setValue(thisWidget.dom.input.value);
-            console.log('Liczba została zmieniona', thisWidget.dom.input.value);
+            //console.log('Liczba została zmieniona', thisWidget.dom.input.value);
         });
         thisWidget.dom.linkDecrease.addEventListener('click', function () {
             thisWidget.setValue(thisWidget.value - 1);
-            console.log('link Decrease');
+            //console.log('link Decrease');
         });
         thisWidget.dom.linkIncrease.addEventListener('click', function () {
             thisWidget.setValue(thisWidget.value + 1);
-            console.log('link Increase');
+            //сonsole.log('link Increase');
         });
     }
 }
