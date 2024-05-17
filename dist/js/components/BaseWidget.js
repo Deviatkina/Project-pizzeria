@@ -7,23 +7,33 @@ class BaseWidget {
         thisWidget.dom = {};
         thisWidget.dom.wrapper = wrapperElement;
 
-        thisWidget.value = initialValue;
+        thisWidget.correctValue = initialValue;
     }
 
-    setValue(value) {
+    get value(){
+        const thisWidget = this;
+
+        return thisWidget.correctValue;
+    }
+    set value(value) {
         const thisWidget = this;
 
         const newValue = thisWidget.parseValue(value);
 
-        if (thisWidget.value !== newValue && thisWidget.isValid(newValue)) {
-            thisWidget.value = newValue;
+        if (thisWidget.correctValue !== newValue && thisWidget.isValid(newValue)) {
+            thisWidget.correctValue = newValue;
             thisWidget.announce();
         } else {
             thisWidget.dom.input.value = settings.amountWidget.defaultValue;
-            thisWidget.value = settings.amountWidget.defaultValue;
+            thisWidget.correctValue = settings.amountWidget.defaultValue;
         }
     
         thisWidget.renderValue();
+    }
+
+    setValue(value){
+        const thisWidget = this;
+        thisWidget.value = value;
     }
 
     parseValue(value) {
